@@ -4,11 +4,11 @@
   become: yes
 
   tasks:
-  -name: Ensure home directory brick is present
-   file:
-    path: /data/homebrick
-    owner: root
-    group: root
-    mode: '1777'
-    state: directory
+  - name: Ensure home directory brick is present
+    file:
+     path: /data/homebrick
+     owner: root
+     group: root
+     mode: '1777'
+     state: directory
 
