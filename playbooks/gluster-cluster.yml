@@ -12,3 +12,8 @@
         mode: '0777'
         state: directory
 
+    - name: Ensure that glusterfs-server is present
+      apt:
+        name: glusterfs-server
+        state: present
+        update_cache: yes
