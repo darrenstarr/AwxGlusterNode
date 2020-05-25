@@ -1,0 +1,2 @@
+# Gluster configuration for cluster
+
