@@ -9,6 +9,6 @@
         path: /data/homebrick
         owner: root
         group: root
-        mode: '1777'
+        mode: '0777'
         state: directory
 
