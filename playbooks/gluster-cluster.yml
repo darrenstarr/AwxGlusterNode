@@ -3,30 +3,31 @@
   hosts: GlusterServers
   become: yes
 
+  vars:
+    volume_group_name: "cluster_vg"
+    physical_volumes: "/dev/vdb"
+
   tasks:
-    # - name: Ensure home directory brick is present
-    #   file:
-    #     path: /data/homebrick
-    #     owner: root
-    #     group: root
-    #     mode: '0777'
-    #     state: directory
+    - name: Ensure home directory brick is present
+      file:
+        path: /data/homebrick
+        owner: root
+        group: root
+        mode: '0777'
+        state: directory
 
-    # - name: Ensure that glusterfs-server is present
-    #   apt:
-    #     name: glusterfs-server
-    #     state: present
-    #     update_cache: yes
+    - name: Ensure that glusterfs-server is present
+      apt:
+        name: glusterfs-server
+        state: present
+        update_cache: yes
 
-    # - name: Ensure gluster is started
-    #   systemd:
-    #     name: glusterd
-    #     state: started
+    - name: Ensure gluster is started
+      systemd:
+        name: glusterd
+        state: started
 
-    - debug:
-        msg: "{{ groups['GlusterServers'] }}"
-
-    - name: Create gluster volume
+    - name: Create gluster volume for home directories
       gluster_volume:
         state: present
         volume: homedirs
@@ -34,4 +35,14 @@
         transport: 'tcp'
         cluster: "{{ groups['GlusterServers'] }}"
         force: yes
-        # cluster: "{{ groups['GlusterServers'] | map('extract', hostvars, ['ansible_host']) }}"
+        run_once: true
+
+    - name: Mount gluster volume as /mnt/home
+      mount:
+        name: "/mnt"
+
+    - name: Add logical volume group
+      lvg:
+        vg: "{{ volume_group_name }}"
+        pvs: "{{ physical_volumes }}"
+
