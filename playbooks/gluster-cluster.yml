@@ -17,3 +17,9 @@
         name: glusterfs-server
         state: present
         update_cache: yes
+
+    - name: Ensure gluster is started
+      systemd:
+        name: glusterd
+        stat: started
+
