@@ -4,29 +4,33 @@
   become: yes
 
   tasks:
-    - name: Ensure home directory brick is present
-      file:
-        path: /data/homebrick
-        owner: root
-        group: root
-        mode: '0777'
-        state: directory
+    # - name: Ensure home directory brick is present
+    #   file:
+    #     path: /data/homebrick
+    #     owner: root
+    #     group: root
+    #     mode: '0777'
+    #     state: directory
 
-    - name: Ensure that glusterfs-server is present
-      apt:
-        name: glusterfs-server
-        state: present
-        update_cache: yes
+    # - name: Ensure that glusterfs-server is present
+    #   apt:
+    #     name: glusterfs-server
+    #     state: present
+    #     update_cache: yes
 
-    - name: Ensure gluster is started
-      systemd:
-        name: glusterd
-        state: started
+    # - name: Ensure gluster is started
+    #   systemd:
+    #     name: glusterd
+    #     state: started
 
-    - name: Create gluster volume
-      gluster_volume:
-        state: present
-        volume: homedirs
-        bricks: '/data/homebrick'
-        transport: 'tcp'
-        cluster: "{{ groups['GlusterServers'] }}"
+    - debug:
+        msg: {{ groups['GlusterServers'] }}
+
+    # - name: Create gluster volume
+    #   gluster_volume:
+    #     state: present
+    #     volume: homedirs
+    #     bricks: '/data/homebrick'
+    #     transport: 'tcp'
+    #     cluster: "{{ groups['GlusterServers'] }}"
+    #     # cluster: "{{ groups['GlusterServers'] | map('extract', hostvars, ['ansible_host']) }}"
