@@ -5,6 +5,8 @@
 
   vars:
     volume_group_name: "cluster_vg"
+    logical_volume_name: "linstore"
+    thinpool_name: "linstore_thinpool"
     physical_volumes: "/dev/vdb"
 
   tasks:
@@ -37,8 +39,15 @@
         force: yes
       run_once: true
 
-    - name: Add logical volume group
-      lvg:
-        vg: "{{ volume_group_name }}"
-        pvs: "{{ physical_volumes }}"
+    # - name: Add logical volume group
+    #   lvg:
+    #     vg: "{{ volume_group_name }}"
+    #     pvs: "{{ physical_volumes }}"
 
+    - name: Create logical volume
+      lvol:
+        vg: "{{ volume_group_name }}"
+        lv: "{{ logical_volume_name }}"
+        size: 10g
+        thinpool: "{{ thinpool_name }}"
+        resizefs: true
