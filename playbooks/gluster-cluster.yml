@@ -24,7 +24,7 @@
     #     state: started
 
     - debug:
-        msg: {{ groups['GlusterServers'] }}
+        msg: "{{ groups['GlusterServers'] }}"
 
     # - name: Create gluster volume
     #   gluster_volume:
