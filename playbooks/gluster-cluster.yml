@@ -40,9 +40,9 @@
       run_once: true
 
     - name: Add logical volume group
-       lvg:
-         vg: "{{ volume_group_name }}"
-         pvs: "{{ physical_volumes }}"
+      lvg:
+        vg: "{{ volume_group_name }}"
+        pvs: "{{ physical_volumes }}"
 
     - name: Create logical volume
       lvol:
