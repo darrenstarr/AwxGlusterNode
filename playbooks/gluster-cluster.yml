@@ -33,4 +33,5 @@
         bricks: '/data/homebrick'
         transport: 'tcp'
         cluster: "{{ groups['GlusterServers'] }}"
+        force: yes
         # cluster: "{{ groups['GlusterServers'] | map('extract', hostvars, ['ansible_host']) }}"
