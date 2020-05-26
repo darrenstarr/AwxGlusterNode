@@ -51,3 +51,9 @@
         size: 10g
         #thinpool: "{{ thinpool_name }}"
         resizefs: true
+
+    - name: Install linstor controller
+      apt:
+        name: linstor-controller
+        state: present
+      when: {{ linstore_master == 'yes' }}
