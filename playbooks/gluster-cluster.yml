@@ -50,4 +50,4 @@
       apt:
         name: linstor-controller
         state: present
-      when: {{ linstor_master == 'yes' }}
+      when: linstor_master is defined && linstor_master == 'yes'
