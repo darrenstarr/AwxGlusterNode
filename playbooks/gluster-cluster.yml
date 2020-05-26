@@ -3,12 +3,6 @@
   hosts: GlusterServers
   become: yes
 
-  vars:
-    volume_group_name: "cluster_vg"
-    logical_volume_name: "linstore"
-    thinpool_name: "linstore_thinpool"
-    physical_volumes: "/dev/vdb"
-
   tasks:
     - name: Ensure home directory brick is present
       file:
@@ -56,4 +50,4 @@
       apt:
         name: linstor-controller
         state: present
-      when: {{ linstore_master == 'yes' }}
+      when: {{ linstor_master == 'yes' }}
