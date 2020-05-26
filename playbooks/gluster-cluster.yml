@@ -49,5 +49,5 @@
         vg: "{{ volume_group_name }}"
         lv: "{{ logical_volume_name }}"
         size: 10g
-        thinpool: "{{ thinpool_name }}"
+        #thinpool: "{{ thinpool_name }}"
         resizefs: true
