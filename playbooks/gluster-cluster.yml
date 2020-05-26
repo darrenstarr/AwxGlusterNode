@@ -35,11 +35,7 @@
         transport: 'tcp'
         cluster: "{{ groups['GlusterServers'] }}"
         force: yes
-        run_once: true
-
-    - name: Mount gluster volume as /mnt/home
-      mount:
-        name: "/mnt"
+      run_once: true
 
     - name: Add logical volume group
       lvg:
