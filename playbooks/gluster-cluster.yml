@@ -29,4 +29,4 @@
         volume: homedirs
         bricks: '/data/homebrick'
         transport: 'tcp'
-        cluster: "{{ groups['GlusterServers'] | map('extract', hostvars, ['ansible_host'])}}"
+        cluster: "{{ groups['GlusterServers'] }}"
