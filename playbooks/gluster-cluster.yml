@@ -26,11 +26,11 @@
     - debug:
         msg: "{{ groups['GlusterServers'] }}"
 
-    # - name: Create gluster volume
-    #   gluster_volume:
-    #     state: present
-    #     volume: homedirs
-    #     bricks: '/data/homebrick'
-    #     transport: 'tcp'
-    #     cluster: "{{ groups['GlusterServers'] }}"
-    #     # cluster: "{{ groups['GlusterServers'] | map('extract', hostvars, ['ansible_host']) }}"
+    - name: Create gluster volume
+      gluster_volume:
+        state: present
+        volume: homedirs
+        bricks: '/data/homebrick'
+        transport: 'tcp'
+        cluster: "{{ groups['GlusterServers'] }}"
+        # cluster: "{{ groups['GlusterServers'] | map('extract', hostvars, ['ansible_host']) }}"
